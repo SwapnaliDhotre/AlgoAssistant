@@ -1,0 +1,778 @@
+[
+    {
+        "id": "asst_11D6FFK0AAAp09gJmhhEdPLD",
+        "created_at": 1746290369,
+        "description": "The CEO agent is responsible for managing communication and ensuring that user queries are directed to the appropriate agents within the BlockchainSolutionsAgency. It serves as the entry point for user interaction.",
+        "instructions": "# BlockchainSolutionsAgency Manifesto\n\n## Mission\nThe mission of BlockchainSolutionsAgency is to provide comprehensive blockchain services, including smart contract development, NFT creation, blockchain interaction, and DeFi management. Our goal is to empower users with seamless blockchain solutions by leveraging the expertise of specialized agents.\n\n## Goals\n1. **Smart Contract Development:** Enable users to create and deploy smart contracts efficiently on both testnet and mainnet.\n2. **NFT Creation and Publishing:** Facilitate the creation and publishing of NFTs on OpenSea, with plans to expand to other marketplaces.\n3. **Blockchain Interaction:** Provide robust capabilities for reading and writing on the Algorand blockchain.\n4. **DeFi Management:** Offer comprehensive DeFi management services, including swap, stake, and rebalance functionalities.\n\n## Working Environment\nThe agency operates in a collaborative environment where agents communicate and coordinate to deliver integrated blockchain solutions. Each agent is specialized in a specific domain, ensuring expert handling of tasks and seamless user experience.\n\n# CEO Agent Instructions\n\nYou are the CEO agent for the BlockchainSolutionsAgency. Your primary role is to manage communication and ensure that user queries are directed to the appropriate agents within the agency. You serve as the entry point for user interaction.\n\n### Primary Instructions:\n1. Receive user input and understand the query or request.\n2. Identify the most suitable agent within the agency to handle the request based on the query's context and requirements.\n3. Route the user's question or request to the identified agent.\n4. Collect the response from the agent and present it back to the user in a clear and concise manner.\n5. Ensure seamless communication between the user and the agents to provide a smooth user experience.\n6. Maintain an overview of all interactions to ensure efficient and effective service delivery.",
+        "metadata": {},
+        "model": "gpt-4o",
+        "name": "CEOAgent",
+        "object": "assistant",
+        "tools": [
+            {
+                "function": {
+                    "name": "SendMessage",
+                    "description": "Correctly extracted `SendMessage` with all the required parameters with correct types",
+                    "parameters": {
+                        "$defs": {
+                            "recipient": {
+                                "enum": [
+                                    "SmartContractDevDeployer",
+                                    "NFTDevPublisher",
+                                    "BlockchainReadWrite",
+                                    "DeFiManager"
+                                ],
+                                "title": "recipient",
+                                "type": "string"
+                            }
+                        },
+                        "properties": {
+                            "recipient": {
+                                "$ref": "#/$defs/recipient",
+                                "description": "SmartContractDevDeployer: The Smart Contract Developer and Deployer agent is responsible for developing smart contracts based on user input and deploying them on testnet or mainnet as specified by the user.\nNFTDevPublisher: The NFT Developer and Publisher agent is responsible for developing NFTs as specified by the user and deploying/publishing them on OpenSea.\nBlockchainReadWrite: The Blockchain Read/Write agent is responsible for reading and writing on the Algorand blockchain.\nDeFiManager: The DeFi Manager agent is responsible for maintaining DeFi functions like swap, stake, and rebalance within the BlockchainSolutionsAgency.\n"
+                            },
+                            "my_primary_instructions": {
+                                "description": "Please repeat your primary instructions step-by-step, including both completed and the following next steps that you need to perform. For multi-step, complex tasks, first break them down into smaller steps yourself. Then, issue each step individually to the recipient agent via the message parameter. Each identified step should be sent in a separate message. Keep in mind that the recipient agent does not have access to these instructions. You must include recipient agent-specific instructions in the message or in the additional_instructions parameters.",
+                                "title": "My Primary Instructions",
+                                "type": "string"
+                            },
+                            "message": {
+                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions. Make sure to inlcude all the relevant information from the conversation needed to complete the task.",
+                                "title": "Message",
+                                "type": "string"
+                            },
+                            "message_files": {
+                                "anyOf": [
+                                    {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "A list of file IDs to be sent as attachments to this message. Only use this if you have the file ID that starts with 'file-'.",
+                                "examples": [
+                                    "file-1234",
+                                    "file-5678"
+                                ],
+                                "title": "Message Files"
+                            },
+                            "additional_instructions": {
+                                "anyOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "Additional context or instructions from the conversation needed by the recipient agent to complete the task.",
+                                "title": "Additional Instructions"
+                            }
+                        },
+                        "required": [
+                            "message",
+                            "my_primary_instructions",
+                            "recipient"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            }
+        ],
+        "response_format": "auto",
+        "temperature": 0.3,
+        "tool_resources": {
+            "code_interpreter": null,
+            "file_search": null
+        },
+        "top_p": 1.0,
+        "reasoning_effort": null
+    },
+    {
+        "id": "asst_sG3nmYUiLkPbO8t0Np5zlE2q",
+        "created_at": 1746290372,
+        "description": "The Smart Contract Developer and Deployer agent is responsible for developing smart contracts based on user input and deploying them on testnet or mainnet as specified by the user.",
+        "instructions": "# BlockchainSolutionsAgency Manifesto\n\n## Mission\nThe mission of BlockchainSolutionsAgency is to provide comprehensive blockchain services, including smart contract development, NFT creation, blockchain interaction, and DeFi management. Our goal is to empower users with seamless blockchain solutions by leveraging the expertise of specialized agents.\n\n## Goals\n1. **Smart Contract Development:** Enable users to create and deploy smart contracts efficiently on both testnet and mainnet.\n2. **NFT Creation and Publishing:** Facilitate the creation and publishing of NFTs on OpenSea, with plans to expand to other marketplaces.\n3. **Blockchain Interaction:** Provide robust capabilities for reading and writing on the Algorand blockchain.\n4. **DeFi Management:** Offer comprehensive DeFi management services, including swap, stake, and rebalance functionalities.\n\n## Working Environment\nThe agency operates in a collaborative environment where agents communicate and coordinate to deliver integrated blockchain solutions. Each agent is specialized in a specific domain, ensuring expert handling of tasks and seamless user experience.\n\n# Smart Contract Developer and Deployer Agent Instructions\n\nYou are the Smart Contract Developer and Deployer agent for the BlockchainSolutionsAgency. Your primary role is to develop smart contracts based on user input and deploy them on the specified network, either testnet or mainnet.\n\n### Primary Instructions:\n1. Receive user input regarding the requirements and specifications for the smart contract.\n2. Utilize smart contract development tools to write and test the smart contract code.\n3. Ensure that the smart contract meets the user's requirements and adheres to best practices for security and efficiency.\n4. Deploy the smart contract on the specified network (testnet or mainnet) using blockchain deployment APIs.\n5. Provide feedback to the user on the deployment status and any relevant transaction details.\n6. Collaborate with other agents in the agency as needed to ensure seamless integration and functionality of the smart contract within the broader blockchain solutions provided.",
+        "metadata": {},
+        "model": "gpt-4o",
+        "name": "SmartContractDevDeployer",
+        "object": "assistant",
+        "tools": [
+            {
+                "function": {
+                    "name": "BlockchainDeploymentAPI",
+                    "description": "A tool for deploying smart contracts on blockchain networks.\nIt supports both testnet and mainnet deployments, and includes features for connecting to blockchain nodes,\nsending transactions, and retrieving deployment status and transaction details.",
+                    "parameters": {
+                        "properties": {
+                            "network": {
+                                "description": "The blockchain network to connect to. Supported values are 'mainnet', 'ropsten', 'rinkeby', etc.",
+                                "title": "Network",
+                                "type": "string"
+                            },
+                            "private_key": {
+                                "description": "The private key of the account used for deploying the contract.",
+                                "title": "Private Key",
+                                "type": "string"
+                            },
+                            "contract_abi": {
+                                "description": "The ABI of the smart contract to be deployed.",
+                                "items": {},
+                                "title": "Contract Abi",
+                                "type": "array"
+                            },
+                            "contract_bytecode": {
+                                "description": "The bytecode of the smart contract to be deployed.",
+                                "title": "Contract Bytecode",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "contract_abi",
+                            "contract_bytecode",
+                            "network",
+                            "private_key"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "SmartContractDevelopmentTool",
+                    "description": "A tool for writing and testing smart contract code in Solidity and Vyper.\nIt provides functionalities for syntax highlighting, code compilation, and error checking.",
+                    "parameters": {
+                        "properties": {
+                            "language": {
+                                "description": "The programming language of the smart contract. Supported values are 'solidity' and 'vyper'.",
+                                "title": "Language",
+                                "type": "string"
+                            },
+                            "code": {
+                                "description": "The smart contract code to be processed.",
+                                "title": "Code",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "code",
+                            "language"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "SendMessage",
+                    "description": "Correctly extracted `SendMessage` with all the required parameters with correct types",
+                    "parameters": {
+                        "$defs": {
+                            "recipient": {
+                                "enum": [
+                                    "BlockchainReadWrite"
+                                ],
+                                "title": "recipient",
+                                "type": "string"
+                            }
+                        },
+                        "properties": {
+                            "recipient": {
+                                "$ref": "#/$defs/recipient",
+                                "description": "BlockchainReadWrite: The Blockchain Read/Write agent is responsible for reading and writing on the Algorand blockchain.\n"
+                            },
+                            "my_primary_instructions": {
+                                "description": "Please repeat your primary instructions step-by-step, including both completed and the following next steps that you need to perform. For multi-step, complex tasks, first break them down into smaller steps yourself. Then, issue each step individually to the recipient agent via the message parameter. Each identified step should be sent in a separate message. Keep in mind that the recipient agent does not have access to these instructions. You must include recipient agent-specific instructions in the message or in the additional_instructions parameters.",
+                                "title": "My Primary Instructions",
+                                "type": "string"
+                            },
+                            "message": {
+                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions. Make sure to inlcude all the relevant information from the conversation needed to complete the task.",
+                                "title": "Message",
+                                "type": "string"
+                            },
+                            "message_files": {
+                                "anyOf": [
+                                    {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "A list of file IDs to be sent as attachments to this message. Only use this if you have the file ID that starts with 'file-'.",
+                                "examples": [
+                                    "file-1234",
+                                    "file-5678"
+                                ],
+                                "title": "Message Files"
+                            },
+                            "additional_instructions": {
+                                "anyOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "Additional context or instructions from the conversation needed by the recipient agent to complete the task.",
+                                "title": "Additional Instructions"
+                            }
+                        },
+                        "required": [
+                            "message",
+                            "my_primary_instructions",
+                            "recipient"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            }
+        ],
+        "response_format": "auto",
+        "temperature": 0.3,
+        "tool_resources": {
+            "code_interpreter": null,
+            "file_search": null
+        },
+        "top_p": 1.0,
+        "reasoning_effort": null
+    },
+    {
+        "id": "asst_4NQfQn4UHenwFW7VtFpx7kjZ",
+        "created_at": 1746290373,
+        "description": "The NFT Developer and Publisher agent is responsible for developing NFTs as specified by the user and deploying/publishing them on OpenSea.",
+        "instructions": "# BlockchainSolutionsAgency Manifesto\n\n## Mission\nThe mission of BlockchainSolutionsAgency is to provide comprehensive blockchain services, including smart contract development, NFT creation, blockchain interaction, and DeFi management. Our goal is to empower users with seamless blockchain solutions by leveraging the expertise of specialized agents.\n\n## Goals\n1. **Smart Contract Development:** Enable users to create and deploy smart contracts efficiently on both testnet and mainnet.\n2. **NFT Creation and Publishing:** Facilitate the creation and publishing of NFTs on OpenSea, with plans to expand to other marketplaces.\n3. **Blockchain Interaction:** Provide robust capabilities for reading and writing on the Algorand blockchain.\n4. **DeFi Management:** Offer comprehensive DeFi management services, including swap, stake, and rebalance functionalities.\n\n## Working Environment\nThe agency operates in a collaborative environment where agents communicate and coordinate to deliver integrated blockchain solutions. Each agent is specialized in a specific domain, ensuring expert handling of tasks and seamless user experience.\n\n# NFT Developer and Publisher Agent Instructions\n\nYou are the NFT Developer and Publisher agent for the BlockchainSolutionsAgency. Your primary role is to develop NFTs based on user specifications and deploy or publish them on OpenSea.\n\n### Primary Instructions:\n1. Receive user input regarding the specifications and requirements for the NFT, including metadata and any associated files.\n2. Utilize NFT creation tools to generate the NFT according to the user's specifications.\n3. Ensure that the NFT meets the user's requirements and adheres to best practices for quality and compatibility.\n4. Deploy or publish the NFT on OpenSea using the OpenSea API.\n5. Provide feedback to the user on the deployment status and any relevant details about the NFT listing on OpenSea.\n6. Collaborate with other agents in the agency as needed to ensure seamless integration and functionality of the NFT within the broader blockchain solutions provided.",
+        "metadata": {},
+        "model": "gpt-4o",
+        "name": "NFTDevPublisher",
+        "object": "assistant",
+        "tools": [
+            {
+                "function": {
+                    "name": "NFTCreationTool",
+                    "description": "A tool for creating NFTs based on user specifications.\nIt supports the generation of NFT metadata, including attributes like name, description, image, and additional properties.\nThe tool also handles the storage of associated files, such as images, on IPFS using Pinata.",
+                    "parameters": {
+                        "properties": {
+                            "name": {
+                                "description": "The name of the NFT.",
+                                "title": "Name",
+                                "type": "string"
+                            },
+                            "description": {
+                                "description": "A description of the NFT.",
+                                "title": "Description",
+                                "type": "string"
+                            },
+                            "image_path": {
+                                "description": "The local file path to the image associated with the NFT.",
+                                "title": "Image Path",
+                                "type": "string"
+                            },
+                            "additional_properties": {
+                                "additionalProperties": true,
+                                "default": {},
+                                "description": "Any additional properties to include in the NFT metadata.",
+                                "title": "Additional Properties",
+                                "type": "object"
+                            }
+                        },
+                        "required": [
+                            "description",
+                            "image_path",
+                            "name"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "OpenSeaAPITool",
+                    "description": "A tool for interacting with the OpenSea API for deploying and managing NFTs.\nIt supports operations such as listing NFTs, updating metadata, and retrieving listing status.\nThe tool handles authentication and API requests to OpenSea's endpoints.",
+                    "parameters": {
+                        "properties": {
+                            "asset_contract_address": {
+                                "description": "The contract address of the NFT asset.",
+                                "title": "Asset Contract Address",
+                                "type": "string"
+                            },
+                            "token_id": {
+                                "description": "The token ID of the NFT.",
+                                "title": "Token Id",
+                                "type": "string"
+                            },
+                            "operation": {
+                                "description": "The operation to perform: 'list', 'update_metadata', or 'get_status'.",
+                                "title": "Operation",
+                                "type": "string"
+                            },
+                            "metadata": {
+                                "additionalProperties": true,
+                                "default": null,
+                                "description": "The metadata to update for the NFT, required for 'update_metadata' operation.",
+                                "title": "Metadata",
+                                "type": "object"
+                            }
+                        },
+                        "required": [
+                            "asset_contract_address",
+                            "operation",
+                            "token_id"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "SendMessage",
+                    "description": "Correctly extracted `SendMessage` with all the required parameters with correct types",
+                    "parameters": {
+                        "$defs": {
+                            "recipient": {
+                                "enum": [
+                                    "BlockchainReadWrite"
+                                ],
+                                "title": "recipient",
+                                "type": "string"
+                            }
+                        },
+                        "properties": {
+                            "recipient": {
+                                "$ref": "#/$defs/recipient",
+                                "description": "BlockchainReadWrite: The Blockchain Read/Write agent is responsible for reading and writing on the Algorand blockchain.\n"
+                            },
+                            "my_primary_instructions": {
+                                "description": "Please repeat your primary instructions step-by-step, including both completed and the following next steps that you need to perform. For multi-step, complex tasks, first break them down into smaller steps yourself. Then, issue each step individually to the recipient agent via the message parameter. Each identified step should be sent in a separate message. Keep in mind that the recipient agent does not have access to these instructions. You must include recipient agent-specific instructions in the message or in the additional_instructions parameters.",
+                                "title": "My Primary Instructions",
+                                "type": "string"
+                            },
+                            "message": {
+                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions. Make sure to inlcude all the relevant information from the conversation needed to complete the task.",
+                                "title": "Message",
+                                "type": "string"
+                            },
+                            "message_files": {
+                                "anyOf": [
+                                    {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "A list of file IDs to be sent as attachments to this message. Only use this if you have the file ID that starts with 'file-'.",
+                                "examples": [
+                                    "file-1234",
+                                    "file-5678"
+                                ],
+                                "title": "Message Files"
+                            },
+                            "additional_instructions": {
+                                "anyOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "Additional context or instructions from the conversation needed by the recipient agent to complete the task.",
+                                "title": "Additional Instructions"
+                            }
+                        },
+                        "required": [
+                            "message",
+                            "my_primary_instructions",
+                            "recipient"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            }
+        ],
+        "response_format": "auto",
+        "temperature": 0.3,
+        "tool_resources": {
+            "code_interpreter": null,
+            "file_search": null
+        },
+        "top_p": 1.0,
+        "reasoning_effort": null
+    },
+    {
+        "id": "asst_yp2g35LfFEV6sFr9oilERsAu",
+        "created_at": 1746290374,
+        "description": "The Blockchain Read/Write agent is responsible for reading and writing on the Algorand blockchain.",
+        "instructions": "# BlockchainSolutionsAgency Manifesto\n\n## Mission\nThe mission of BlockchainSolutionsAgency is to provide comprehensive blockchain services, including smart contract development, NFT creation, blockchain interaction, and DeFi management. Our goal is to empower users with seamless blockchain solutions by leveraging the expertise of specialized agents.\n\n## Goals\n1. **Smart Contract Development:** Enable users to create and deploy smart contracts efficiently on both testnet and mainnet.\n2. **NFT Creation and Publishing:** Facilitate the creation and publishing of NFTs on OpenSea, with plans to expand to other marketplaces.\n3. **Blockchain Interaction:** Provide robust capabilities for reading and writing on the Algorand blockchain.\n4. **DeFi Management:** Offer comprehensive DeFi management services, including swap, stake, and rebalance functionalities.\n\n## Working Environment\nThe agency operates in a collaborative environment where agents communicate and coordinate to deliver integrated blockchain solutions. Each agent is specialized in a specific domain, ensuring expert handling of tasks and seamless user experience.\n\n# Blockchain Read/Write Agent Instructions\n\nYou are the Blockchain Read/Write agent for the BlockchainSolutionsAgency. Your primary role is to handle all interactions with the Algorand blockchain, ensuring efficient and accurate read and write operations as required by user tasks.\n\n### Primary Instructions:\n1. Receive user input regarding the specific read or write operations needed on the Algorand blockchain.\n2. Utilize the Algorand blockchain API to perform the requested operations.\n3. Ensure that all interactions with the blockchain are secure and adhere to best practices for blockchain operations.\n4. Provide feedback to the user on the status and results of the blockchain operations, including any transaction details or data retrieved.\n5. Collaborate with other agents in the agency as needed to ensure seamless integration and functionality within the broader blockchain solutions provided.",
+        "metadata": {},
+        "model": "gpt-4o",
+        "name": "BlockchainReadWrite",
+        "object": "assistant",
+        "tools": [
+            {
+                "function": {
+                    "name": "AlgorandReadTool",
+                    "description": "A tool for reading data from the Algorand blockchain.\nIt supports operations such as retrieving account information, transaction details, and asset information.\nThe tool utilizes the Algorand API to fetch the required data.",
+                    "parameters": {
+                        "properties": {
+                            "operation": {
+                                "description": "The operation to perform: 'account_info', 'transaction_details', or 'asset_info'.",
+                                "title": "Operation",
+                                "type": "string"
+                            },
+                            "account_address": {
+                                "default": null,
+                                "description": "The Algorand account address, required for 'account_info' operation.",
+                                "title": "Account Address",
+                                "type": "string"
+                            },
+                            "transaction_id": {
+                                "default": null,
+                                "description": "The transaction ID, required for 'transaction_details' operation.",
+                                "title": "Transaction Id",
+                                "type": "string"
+                            },
+                            "asset_id": {
+                                "default": null,
+                                "description": "The asset ID, required for 'asset_info' operation.",
+                                "title": "Asset Id",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "operation"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "AlgorandWriteTool",
+                    "description": "A tool for writing data to the Algorand blockchain.\nIt supports operations such as sending transactions, creating assets, and managing smart contracts.\nThe tool utilizes the Algorand API to perform these operations securely and efficiently.",
+                    "parameters": {
+                        "properties": {
+                            "operation": {
+                                "description": "The operation to perform: 'send_transaction', 'create_asset', or 'manage_contract'.",
+                                "title": "Operation",
+                                "type": "string"
+                            },
+                            "sender_private_key": {
+                                "description": "The private key of the sender's account.",
+                                "title": "Sender Private Key",
+                                "type": "string"
+                            },
+                            "receiver_address": {
+                                "default": null,
+                                "description": "The receiver's account address, required for 'send_transaction' operation.",
+                                "title": "Receiver Address",
+                                "type": "string"
+                            },
+                            "amount": {
+                                "default": 0,
+                                "description": "The amount of microAlgos to send, required for 'send_transaction' operation.",
+                                "title": "Amount",
+                                "type": "integer"
+                            },
+                            "asset_params": {
+                                "additionalProperties": true,
+                                "default": null,
+                                "description": "The parameters for asset creation, required for 'create_asset' operation.",
+                                "title": "Asset Params",
+                                "type": "object"
+                            },
+                            "contract_params": {
+                                "additionalProperties": true,
+                                "default": null,
+                                "description": "The parameters for managing a smart contract, required for 'manage_contract' operation.",
+                                "title": "Contract Params",
+                                "type": "object"
+                            }
+                        },
+                        "required": [
+                            "operation",
+                            "sender_private_key"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            }
+        ],
+        "response_format": "auto",
+        "temperature": 0.3,
+        "tool_resources": {
+            "code_interpreter": null,
+            "file_search": null
+        },
+        "top_p": 1.0,
+        "reasoning_effort": null
+    },
+    {
+        "id": "asst_g95uG4rDecRWy8T0nwGvXRGU",
+        "created_at": 1746290374,
+        "description": "The DeFi Manager agent is responsible for maintaining DeFi functions like swap, stake, and rebalance within the BlockchainSolutionsAgency.",
+        "instructions": "# BlockchainSolutionsAgency Manifesto\n\n## Mission\nThe mission of BlockchainSolutionsAgency is to provide comprehensive blockchain services, including smart contract development, NFT creation, blockchain interaction, and DeFi management. Our goal is to empower users with seamless blockchain solutions by leveraging the expertise of specialized agents.\n\n## Goals\n1. **Smart Contract Development:** Enable users to create and deploy smart contracts efficiently on both testnet and mainnet.\n2. **NFT Creation and Publishing:** Facilitate the creation and publishing of NFTs on OpenSea, with plans to expand to other marketplaces.\n3. **Blockchain Interaction:** Provide robust capabilities for reading and writing on the Algorand blockchain.\n4. **DeFi Management:** Offer comprehensive DeFi management services, including swap, stake, and rebalance functionalities.\n\n## Working Environment\nThe agency operates in a collaborative environment where agents communicate and coordinate to deliver integrated blockchain solutions. Each agent is specialized in a specific domain, ensuring expert handling of tasks and seamless user experience.\n\n# DeFi Manager Agent Instructions\n\nYou are the DeFi Manager agent for the BlockchainSolutionsAgency. Your primary role is to manage decentralized finance (DeFi) functions such as swap, stake, and rebalance operations as per user requirements.\n\n### Primary Instructions:\n1. Receive user input regarding the specific DeFi operations needed, such as swapping tokens, staking assets, or rebalancing portfolios.\n2. Utilize DeFi management tools and relevant blockchain APIs to perform the requested operations.\n3. Ensure that all DeFi interactions are secure and adhere to best practices for decentralized finance operations.\n4. Provide feedback to the user on the status and results of the DeFi operations, including any transaction details or changes in asset allocations.\n5. Collaborate with other agents in the agency as needed to ensure seamless integration and functionality within the broader blockchain solutions provided.",
+        "metadata": {},
+        "model": "gpt-4o",
+        "name": "DeFiManager",
+        "object": "assistant",
+        "tools": [
+            {
+                "function": {
+                    "name": "DeFiRebalanceTool",
+                    "description": "A tool for rebalancing a DeFi portfolio by adjusting token allocations across different DeFi protocols.\nIt handles connecting to the protocols, executing the rebalancing operations, and returning transaction details.",
+                    "parameters": {
+                        "properties": {
+                            "private_key": {
+                                "description": "The private key of the user's wallet for signing transactions.",
+                                "title": "Private Key",
+                                "type": "string"
+                            },
+                            "target_allocations": {
+                                "additionalProperties": true,
+                                "description": "A dictionary specifying the target allocations for each token in the portfolio.",
+                                "title": "Target Allocations",
+                                "type": "object"
+                            },
+                            "current_allocations": {
+                                "additionalProperties": true,
+                                "description": "A dictionary specifying the current allocations for each token in the portfolio.",
+                                "title": "Current Allocations",
+                                "type": "object"
+                            },
+                            "protocols": {
+                                "additionalProperties": true,
+                                "description": "A dictionary specifying the DeFi protocols and their respective contract addresses.",
+                                "title": "Protocols",
+                                "type": "object"
+                            }
+                        },
+                        "required": [
+                            "current_allocations",
+                            "private_key",
+                            "protocols",
+                            "target_allocations"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "DeFiStakeTool",
+                    "description": "A tool for staking tokens in DeFi protocols such as liquidity pools or yield farming platforms.\nIt handles connecting to the protocol, executing the staking operation, and returning transaction details.",
+                    "parameters": {
+                        "properties": {
+                            "protocol": {
+                                "description": "The DeFi protocol to use for staking, e.g., 'uniswap', 'sushiswap', etc.",
+                                "title": "Protocol",
+                                "type": "string"
+                            },
+                            "private_key": {
+                                "description": "The private key of the user's wallet for signing transactions.",
+                                "title": "Private Key",
+                                "type": "string"
+                            },
+                            "token_address": {
+                                "description": "The address of the token to stake.",
+                                "title": "Token Address",
+                                "type": "string"
+                            },
+                            "amount": {
+                                "description": "The amount of the token to stake.",
+                                "title": "Amount",
+                                "type": "integer"
+                            },
+                            "pool_address": {
+                                "description": "The address of the liquidity pool or yield farming contract.",
+                                "title": "Pool Address",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "amount",
+                            "pool_address",
+                            "private_key",
+                            "protocol",
+                            "token_address"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "DeFiSwapTool",
+                    "description": "A tool for performing token swaps on decentralized exchanges (DEXs) like Uniswap or SushiSwap.\nIt handles connecting to the DEX, executing the swap, and returning transaction details.",
+                    "parameters": {
+                        "properties": {
+                            "dex": {
+                                "description": "The decentralized exchange to use: 'uniswap' or 'sushiswap'.",
+                                "title": "Dex",
+                                "type": "string"
+                            },
+                            "private_key": {
+                                "description": "The private key of the user's wallet for signing transactions.",
+                                "title": "Private Key",
+                                "type": "string"
+                            },
+                            "token_in": {
+                                "description": "The address of the token to swap from.",
+                                "title": "Token In",
+                                "type": "string"
+                            },
+                            "token_out": {
+                                "description": "The address of the token to swap to.",
+                                "title": "Token Out",
+                                "type": "string"
+                            },
+                            "amount_in": {
+                                "description": "The amount of the input token to swap.",
+                                "title": "Amount In",
+                                "type": "integer"
+                            },
+                            "slippage": {
+                                "default": 0.01,
+                                "description": "The acceptable slippage percentage for the swap.",
+                                "title": "Slippage",
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "amount_in",
+                            "dex",
+                            "private_key",
+                            "token_in",
+                            "token_out"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            },
+            {
+                "function": {
+                    "name": "SendMessage",
+                    "description": "Correctly extracted `SendMessage` with all the required parameters with correct types",
+                    "parameters": {
+                        "$defs": {
+                            "recipient": {
+                                "enum": [
+                                    "BlockchainReadWrite"
+                                ],
+                                "title": "recipient",
+                                "type": "string"
+                            }
+                        },
+                        "properties": {
+                            "recipient": {
+                                "$ref": "#/$defs/recipient",
+                                "description": "BlockchainReadWrite: The Blockchain Read/Write agent is responsible for reading and writing on the Algorand blockchain.\n"
+                            },
+                            "my_primary_instructions": {
+                                "description": "Please repeat your primary instructions step-by-step, including both completed and the following next steps that you need to perform. For multi-step, complex tasks, first break them down into smaller steps yourself. Then, issue each step individually to the recipient agent via the message parameter. Each identified step should be sent in a separate message. Keep in mind that the recipient agent does not have access to these instructions. You must include recipient agent-specific instructions in the message or in the additional_instructions parameters.",
+                                "title": "My Primary Instructions",
+                                "type": "string"
+                            },
+                            "message": {
+                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions. Make sure to inlcude all the relevant information from the conversation needed to complete the task.",
+                                "title": "Message",
+                                "type": "string"
+                            },
+                            "message_files": {
+                                "anyOf": [
+                                    {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "A list of file IDs to be sent as attachments to this message. Only use this if you have the file ID that starts with 'file-'.",
+                                "examples": [
+                                    "file-1234",
+                                    "file-5678"
+                                ],
+                                "title": "Message Files"
+                            },
+                            "additional_instructions": {
+                                "anyOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
+                                "default": null,
+                                "description": "Additional context or instructions from the conversation needed by the recipient agent to complete the task.",
+                                "title": "Additional Instructions"
+                            }
+                        },
+                        "required": [
+                            "message",
+                            "my_primary_instructions",
+                            "recipient"
+                        ],
+                        "type": "object"
+                    },
+                    "strict": false
+                },
+                "type": "function"
+            }
+        ],
+        "response_format": "auto",
+        "temperature": 0.3,
+        "tool_resources": {
+            "code_interpreter": null,
+            "file_search": null
+        },
+        "top_p": 1.0,
+        "reasoning_effort": null
+    }
+]

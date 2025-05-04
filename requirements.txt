@@ -1,0 +1,5 @@
+py-solc-x
+py-algorand-sdk
+web3<6.0.0
+agency-swarm
+vyper
